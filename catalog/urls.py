@@ -17,8 +17,8 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.views.generic import RedirectView
 
-from .views import test_view
+from . import views
 
 urlpatterns = [
-    url(r'^$', test_view)
+    url(r'^$', views.test_view)
 ]
