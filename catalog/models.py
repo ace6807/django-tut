@@ -25,11 +25,16 @@ class Book(models.Model):
     genre = models.ManyToManyField(Genre, help_text="Select a genre for this book")
     language = models.ForeignKey('Language', on_delete=models.SET_NULL, null=True)
 
-    def __str__(self):
-        return self.title
-
     def get_absolute_url(self):
         return reverse('book-detail', args=[str(self.id)])
+
+    def display_genre(self):
+        return ', '.join([genre.name for genre in self.genre.all()[:3]])
+
+    display_genre.short_description = 'Genre'
+
+    def __str__(self):
+        return self.title
 
 
 class BookInstance(models.Model):
@@ -49,6 +54,9 @@ class BookInstance(models.Model):
 
     class Meta:
         ordering = ["due_back"]
+
+    def display_author(self):
+        return self.book.author
 
     def __str__(self):
         return f"{self.id} ({self.book.title})"
