@@ -20,5 +20,5 @@ from django.views.generic import RedirectView
 from . import views
 
 urlpatterns = [
-    url(r'^$', views.test_view)
+    url(r'^$', views.index, name='index'),
 ]
